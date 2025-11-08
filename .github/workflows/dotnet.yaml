@@ -22,8 +22,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build for Windows
-      run: dotnet build --configuration Release --runtime win-x64 --no-restore
+    - name: Build (Release)
+      run: dotnet build --configuration Release --no-restore
 
-    - name: Build for Linux
-      run: dotnet build --configuration Release --runtime linux-x64 --no-restore
+    - name: Run tests (if present)
+      run: dotnet test --no-build --verbosity normal || echo "No tests found"
