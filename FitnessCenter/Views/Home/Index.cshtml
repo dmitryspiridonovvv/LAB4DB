@@ -1,0 +1,35 @@
+﻿@model IEnumerable<FitnessCenter.Models.Client>
+
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<h2>Главная страница фитнес-клуба</h2>
+
+<p>
+    <a asp-controller="Clients" asp-action="Index" class="btn btn-primary">Список клиентов</a>
+    <a asp-controller="Visits" asp-action="Index" class="btn btn-secondary">Посещения</a>
+</p>
+
+<h4>Клиенты клуба</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.LastName</td>
+                <td>@c.FirstName</td>
+                <td>@c.Phone</td>
+                <td>@c.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

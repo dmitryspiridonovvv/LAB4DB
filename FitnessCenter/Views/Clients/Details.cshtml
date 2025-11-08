@@ -1,0 +1,60 @@
+﻿@model FitnessCenter.Models.Client
+
+@{
+    ViewData["Title"] = "Информация о клиенте";
+}
+
+<h2>Информация о клиенте</h2>
+
+<div>
+    <h4>@($"{Model.LastName} {Model.FirstName} {Model.MiddleName}")</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Дата рождения</dt>
+        <dd class="col-sm-9">@Model.BirthDate.ToString("yyyy-MM-dd")</dd>
+
+        <dt class="col-sm-3">Пол</dt>
+        <dd class="col-sm-9">@Model.Gender</dd>
+
+        <dt class="col-sm-3">Телефон</dt>
+        <dd class="col-sm-9">@Model.Phone</dd>
+
+        <dt class="col-sm-3">Email</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+
+        <dt class="col-sm-3">Дата регистрации</dt>
+        <dd class="col-sm-9">@Model.RegistrationDate.ToString("yyyy-MM-dd")</dd>
+    </dl>
+
+    <h5>Активные абонементы</h5>
+    <ul>
+        @if (Model.Sales != null && Model.Sales.Any())
+        {
+            foreach (var sale in Model.Sales)
+            {
+                <li>@sale.MembershipPlan.Name — @sale.StartDate.ToShortDateString() по @(sale.EndDate?.ToShortDateString() ?? "-")</li>
+            }
+        }
+        else
+        {
+            <li>Нет активных абонементов</li>
+        }
+    </ul>
+
+    <h5>История посещений</h5>
+    <ul>
+        @if (Model.Visits != null && Model.Visits.Any())
+        {
+            foreach (var v in Model.Visits)
+            {
+                <li>@v.CheckInTime.ToString("g") — @(v.CheckOutTime?.ToString("g") ?? "Ещё в клубе")</li>
+            }
+        }
+        else
+        {
+            <li>Нет записей о посещениях</li>
+        }
+    </ul>
+
+    <a asp-action="Index" class="btn btn-secondary mt-2">Назад</a>
+</div>

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<FitnessCenter.Models.Visit>
+
+@{
+    ViewData["Title"] = "Посещения";
+}
+
+<h2>Посещения</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Добавить посещение</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Клиент</th>
+            <th>Вход</th>
+            <th>Выход</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+            <tr>
+                <td>@($"{v.Client.LastName} {v.Client.FirstName}")</td>
+                <td>@v.CheckInTime.ToString("g")</td>
+                <td>@(v.CheckOutTime?.ToString("g") ?? "-")</td>
+            </tr>
+        }
+    </tbody>
+</table>
